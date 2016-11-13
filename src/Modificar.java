@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.Year;
 import java.util.InputMismatchException;
 /**
 *Esta clase se encarga de crear la GUI para el boton de modificar gasto
@@ -34,6 +35,7 @@ public class Modificar extends JFrame {
 	private JComboBox cmbTipoM;
 	private JComboBox comboBoxTiempoM;
 	private JButton btnModificarGasto;
+	int anio = Year.now().getValue();
 
 	/**
 	 * Launch the application.
@@ -104,12 +106,163 @@ public class Modificar extends JFrame {
 		cmbDiaM.setBounds(139, 130, 50, 20);
 		contentPane.add(cmbDiaM);
 		cmbDiaM.setModel(new DefaultComboBoxModel(new String[] {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31",}));
+		cmbDiaM.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if((cmbDiaM.getSelectedItem()=="31")&&(cmbMesM.getSelectedItem()=="Marzo")){
+			 		JOptionPane.showMessageDialog(frame,
+			 			    "La fecha no es valida",
+			 			    "Error",
+			 			    JOptionPane.ERROR_MESSAGE);
+			 		cmbDiaM.setSelectedItem("30");
+				}
+				if((cmbDiaM.getSelectedItem()=="31")&&(cmbMesM.getSelectedItem()=="Abril")){
+			 		JOptionPane.showMessageDialog(frame,
+			 			    "La fecha no es valida",
+			 			    "Error",
+			 			    JOptionPane.ERROR_MESSAGE);
+			 		cmbDiaM.setSelectedItem("30");
+				}
+				if((cmbDiaM.getSelectedItem()=="31")&&(cmbMesM.getSelectedItem()=="Junio")){
+			 		JOptionPane.showMessageDialog(frame,
+			 			    "La fecha no es valida",
+			 			    "Error",
+			 			    JOptionPane.ERROR_MESSAGE);
+			 		cmbDiaM.setSelectedItem("30");
+				}
+				if((cmbDiaM.getSelectedItem()=="31")&&(cmbMesM.getSelectedItem()=="Septiembre")){
+					System.err.println("El valor ingresado no es un numero");
+			 		JOptionPane.showMessageDialog(frame,
+			 			    "La fecha no es valida",
+			 			    "Error",
+			 			    JOptionPane.ERROR_MESSAGE);
+			 		cmbDiaM.setSelectedItem("30");
+				}
+				if((cmbDiaM.getSelectedItem()=="31")&&(cmbMesM.getSelectedItem()=="Noviembre")){
+			 		JOptionPane.showMessageDialog(frame,
+			 			    "La fecha no es valida",
+			 			    "Error",
+			 			    JOptionPane.ERROR_MESSAGE);
+			 		cmbDiaM.setSelectedItem("30");
+				}
+				if((cmbDiaM.getSelectedItem()=="31")&&(cmbMesM.getSelectedItem()=="Febrero")){
+			 		JOptionPane.showMessageDialog(frame,
+			 			    "La fecha no es valida",
+			 			    "Error",
+			 			    JOptionPane.ERROR_MESSAGE);
+			 		if((anio%4==0) && (anio%100==0)){
+			 			cmbDiaM.setSelectedItem("28");
+			 		}
+			 		if((anio%4==0) && (anio%100!=0)){
+			 			cmbDiaM.setSelectedItem("29");
+			 		}
+				}
+				if((cmbDiaM.getSelectedItem()=="30")&&(cmbMesM.getSelectedItem()=="Febrero")){
+			 		JOptionPane.showMessageDialog(frame,
+			 			    "La fecha no es valida",
+			 			    "Error",
+			 			    JOptionPane.ERROR_MESSAGE);
+			 		if((anio%4==0) && (anio%100==0)){
+			 			cmbDiaM.setSelectedItem("28");
+			 		}
+			 		if((anio%4==0) && (anio%100!=0)){
+			 			cmbDiaM.setSelectedItem("29");
+			 		}
+			 		
+				}
+				if((cmbDiaM.getSelectedItem()=="29")&&(cmbMesM.getSelectedItem()=="Febrero")){
+					if(anio%4==0){
+					}
+					if((anio%4!=0) && (cmbMesM.getSelectedItem()=="Febrero")){
+						JOptionPane.showMessageDialog(frame,
+					 			    "La fecha no es valida",
+					 			    "Error",
+					 			    JOptionPane.ERROR_MESSAGE);
+					 		cmbDiaM.setSelectedItem("28");
+							cmbMesM.setSelectedItem("Febrero");
+					}
+				}
+			}
+		});
 		
 		cmbMesM = new JComboBox();
 		cmbMesM.setBounds(224, 130, 93, 20);
 		contentPane.add(cmbMesM);
 		cmbMesM.setModel(new DefaultComboBoxModel(new String[] {"Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre",}));
-		
+		cmbMesM.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if((cmbDiaM.getSelectedItem()=="31")&&(cmbMesM.getSelectedItem()=="Marzo")){
+			 		JOptionPane.showMessageDialog(frame,
+			 			    "La fecha no es valida",
+			 			    "Error",
+			 			    JOptionPane.ERROR_MESSAGE);
+			 		cmbDiaM.setSelectedItem("30");
+				}
+				if((cmbDiaM.getSelectedItem()=="31")&&(cmbMesM.getSelectedItem()=="Abril")){
+			 		JOptionPane.showMessageDialog(frame,
+			 			    "La fecha no es valida",
+			 			    "Error",
+			 			    JOptionPane.ERROR_MESSAGE);
+			 		cmbDiaM.setSelectedItem("30");
+				}
+				if((cmbDiaM.getSelectedItem()=="31")&&(cmbMesM.getSelectedItem()=="Junio")){
+			 		JOptionPane.showMessageDialog(frame,
+			 			    "La fecha no es valida",
+			 			    "Error",
+			 			    JOptionPane.ERROR_MESSAGE);
+			 		cmbDiaM.setSelectedItem("30");
+				}
+				if((cmbDiaM.getSelectedItem()=="31")&&(cmbMesM.getSelectedItem()=="Septiembre")){
+					System.err.println("El valor ingresado no es un numero");
+			 		JOptionPane.showMessageDialog(frame,
+			 			    "La fecha no es valida",
+			 			    "Error",
+			 			    JOptionPane.ERROR_MESSAGE);
+			 		cmbDiaM.setSelectedItem("30");
+				}
+				if((cmbDiaM.getSelectedItem()=="31")&&(cmbMesM.getSelectedItem()=="Noviembre")){
+			 		JOptionPane.showMessageDialog(frame,
+			 			    "La fecha no es valida",
+			 			    "Error",
+			 			    JOptionPane.ERROR_MESSAGE);
+			 		cmbDiaM.setSelectedItem("30");
+				}
+				if((cmbDiaM.getSelectedItem()=="31")&&(cmbMesM.getSelectedItem()=="Febrero")){
+			 		JOptionPane.showMessageDialog(frame,
+			 			    "La fecha no es valida",
+			 			    "Error",
+			 			    JOptionPane.ERROR_MESSAGE);
+			 		if((anio%4==0) && (anio%100==0)){
+			 			cmbDiaM.setSelectedItem("28");
+			 		}
+			 		if((anio%4==0) && (anio%100!=0)){
+			 			cmbDiaM.setSelectedItem("29");
+			 		}
+				}
+				if((cmbDiaM.getSelectedItem()=="30")&&(cmbMesM.getSelectedItem()=="Febrero")){
+			 		JOptionPane.showMessageDialog(frame,
+			 			    "La fecha no es valida",
+			 			    "Error",
+			 			    JOptionPane.ERROR_MESSAGE);
+			 		if((anio%4==0) && (anio%100==0)){
+			 			cmbDiaM.setSelectedItem("28");
+			 		}
+			 		if((anio%4==0) && (anio%100!=0)){
+			 			cmbDiaM.setSelectedItem("29");
+			 		}
+				}
+				if((cmbDiaM.getSelectedItem()=="29")&&(cmbMesM.getSelectedItem()=="Febrero")){
+					if(anio%4==0){
+					}
+					if((anio%4!=0) && (cmbMesM.getSelectedItem()=="Febrero")){
+						JOptionPane.showMessageDialog(frame,
+					 			    "La fecha no es valida",
+					 			    "Error",
+					 			    JOptionPane.ERROR_MESSAGE);
+					 		cmbDiaM.setSelectedItem("28");
+					}
+				}
+			}
+		});
 		
 		cmbTipoM = new JComboBox();
 		cmbTipoM.setBounds(156, 102, 93, 20);
@@ -143,10 +296,7 @@ public class Modificar extends JFrame {
 				 	
 				 	textCantM.setText("");
 				 	txtNombreM.setText("");
-				 	comboBoxTiempoM.setSelectedItem("Nignuo");
-				 	cmbDiaM.setSelectedItem("1");
-				 	cmbMesM.setSelectedItem("Enero");
-				 	System.out.println("Pasa algo");
+				 	comboBoxTiempoM.setSelectedItem("Niguna");
 				 	
 				 	}
 				 	catch(InputMismatchException e1){
