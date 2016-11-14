@@ -155,6 +155,32 @@ public class Calculos {
  		return monto;
  	}
  	
+ 	
+ 	public void updateGasto(int cant, String nom, String tipo, int dia, String mes, int id){
+ 		java.sql.Statement st= null;
+ 		String s=new String();
+ 		int x= id+1;
+ 		try {
+			st = mydb.getCon().createStatement();
+		} catch (SQLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+ 		//UPDATE table_name SET field1=new-value1, field2=new-value2
+ 		//		[WHERE Clause]
+ 		PreparedStatement updateExp;
+ 		try {
+ 			updateExp= (PreparedStatement) mydb.getCon().prepareStatement("update dinero SET CantDinero="+cant+", Nombre='"+nom+
+ 					"',Tipo='"+tipo+"', dia='"+dia+"', mes='"+ mes+"' where idDinero='"+x+"';");
+ 			int updateEXP_done= updateExp.executeUpdate();
+ 		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+ 	}
+ 	
+ 	
+ 	
  	/**
 	*Metodo que actualiza los datos de la base de datos
 	*/
