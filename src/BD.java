@@ -71,7 +71,7 @@ public class BD {
  		//* Inicializa statement para la consulta 
  		java.sql.Statement st = null;
  		String s=new String();
- 		double[] gasto = new double[4];
+ 		double[] gasto = new double[5];
  		
  		//* Crea el statement
 	 	try {
@@ -86,15 +86,16 @@ public class BD {
 	 	gasto[1]=getGasto(st,s,"Estudios");
 	 	gasto[2]=getGasto(st,s,"Servicios");
 	 	gasto[3]=getGasto(st,s,"Comida");
+	 	gasto[4]=getGasto(st,s,"Otros");
 	 	
 	 	//*Crea grafica con los datos extraidos
-	 	grafica = new draw(gasto[0],gasto[1],gasto[2],gasto[3]);
+	 	grafica = new draw(gasto[0],gasto[1],gasto[2],gasto[3],gasto[4]);
 	 	
 	 	//*Hace el total
 	 	grafica.setTotal();
 	 	
 	 	//*Rescribe gasto con el porcentaje del gasto
-	 	for (int i = 0; i<=3; i++){
+	 	for (int i = 0; i<=4; i++){
 	 		gasto[i]=grafica.getPorcentaje(gasto[i]);
 	 	}
 	 	

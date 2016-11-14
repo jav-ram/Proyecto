@@ -33,7 +33,6 @@ public class Modificar extends JFrame {
 	private JComboBox cmbDiaM;
 	private JComboBox cmbMesM;
 	private JComboBox cmbTipoM;
-	private JComboBox comboBoxTiempoM;
 	private JButton btnModificarGasto;
 	int anio = Year.now().getValue();
 
@@ -58,7 +57,7 @@ public class Modificar extends JFrame {
 	 */
 	public Modificar() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 400, 300);
+		setBounds(100, 100, 399, 264);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -68,8 +67,8 @@ public class Modificar extends JFrame {
 		lblNombreDeGasto.setBounds(29, 25, 110, 14);
 		contentPane.add(lblNombreDeGasto);
 		
-		JLabel lblNombre = new JLabel("Gasto (Nuevo Comentario)");
-		lblNombre.setBounds(10, 50, 158, 14);
+		JLabel lblNombre = new JLabel("Descripci\u00F3n del gasto");
+		lblNombre.setBounds(31, 50, 158, 14);
 		contentPane.add(lblNombre);
 		
 		JLabel lblMonto = new JLabel("Monto");
@@ -93,12 +92,12 @@ public class Modificar extends JFrame {
 		contentPane.add(comboBoxModificar);
 		
 		textCantM = new JTextField();
-		textCantM.setBounds(178, 73, 139, 20);
+		textCantM.setBounds(155, 73, 162, 20);
 		contentPane.add(textCantM);
 		textCantM.setColumns(10);
 		
 		txtNombreM = new JTextField();
-		txtNombreM.setBounds(178, 47, 139, 20);
+		txtNombreM.setBounds(156, 47, 161, 20);
 		contentPane.add(txtNombreM);
 		txtNombreM.setColumns(10);
 		
@@ -108,6 +107,7 @@ public class Modificar extends JFrame {
 		cmbDiaM.setModel(new DefaultComboBoxModel(new String[] {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31",}));
 		cmbDiaM.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				//Inicia la programación defensiva contra fechas mal ingresadas en el comboBox de los días del mes
 				if((cmbDiaM.getSelectedItem()=="31")&&(cmbMesM.getSelectedItem()=="Marzo")){
 			 		JOptionPane.showMessageDialog(frame,
 			 			    "La fecha no es valida",
@@ -183,13 +183,14 @@ public class Modificar extends JFrame {
 				}
 			}
 		});
-		
+		//Finaliza la programación defensiva contra las fechas mal ingresadas para el comboBox que guarda los días
 		cmbMesM = new JComboBox();
 		cmbMesM.setBounds(224, 130, 93, 20);
 		contentPane.add(cmbMesM);
 		cmbMesM.setModel(new DefaultComboBoxModel(new String[] {"Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre",}));
 		cmbMesM.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				//Programación defensiva contra fechas mal ingresadas en el comboBox de meses
 				if((cmbDiaM.getSelectedItem()=="31")&&(cmbMesM.getSelectedItem()=="Marzo")){
 			 		JOptionPane.showMessageDialog(frame,
 			 			    "La fecha no es valida",
@@ -263,26 +264,22 @@ public class Modificar extends JFrame {
 				}
 			}
 		});
-		
+		//Finaliza programación defensiva contra las fechas no validas en el comboBox de Mes
 		cmbTipoM = new JComboBox();
-		cmbTipoM.setBounds(156, 102, 93, 20);
+		cmbTipoM.setBounds(156, 102, 161, 20);
 		contentPane.add(cmbTipoM);
 		cmbTipoM.setModel(new DefaultComboBoxModel(new String[] {"Ocio","Servicios","Comida","Estudios"}));
-		
-		JLabel lblPeriodicidad = new JLabel("Periodicidad");
-		lblPeriodicidad.setBounds(59, 164, 80, 14);
-		contentPane.add(lblPeriodicidad);
-		
-		comboBoxTiempoM = new JComboBox();
-		comboBoxTiempoM.setBounds(149, 161, 100, 20);
-		contentPane.add(comboBoxTiempoM);
-		comboBoxTiempoM.setModel(new DefaultComboBoxModel(new String[] {"Ninguna","Diaria","Semanal","Mensual","Anual"}));
 		
 		
 		btnModificarGasto = new JButton("Modificar Gasto");
 		btnModificarGasto.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnModificarGasto.setBounds(121, 192, 161, 41);
+		btnModificarGasto.setBounds(29, 177, 161, 41);
 		contentPane.add(btnModificarGasto);
+		
+		JButton btnEliminarGasto = new JButton("Eliminar Gasto");
+		btnEliminarGasto.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnEliminarGasto.setBounds(200, 177, 161, 41);
+		contentPane.add(btnEliminarGasto);
 		btnModificarGasto.addActionListener(new Listener());
 	}
 	class Listener implements ActionListener{
@@ -296,7 +293,6 @@ public class Modificar extends JFrame {
 				 	
 				 	textCantM.setText("");
 				 	txtNombreM.setText("");
-				 	comboBoxTiempoM.setSelectedItem("Niguna");
 				 	
 				 	}
 				 	catch(InputMismatchException e1){

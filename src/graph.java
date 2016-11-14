@@ -24,6 +24,8 @@ import com.mysql.jdbc.Statement;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JSeparator;
+import javax.swing.SwingConstants;
 
 /**
 *Esta clase grafica los datos de la base de datos
@@ -50,7 +52,6 @@ public class graph {
 	private JLabel lblMes;
 	private JComboBox cmbDia;
 	private JComboBox cmbMes;
-	private JComboBox comboBoxTiempo;
 	private JComboBox cmbTipo;
 	private JButton btnVerDatos;
 	private JButton btnGraficar;
@@ -107,15 +108,17 @@ public class graph {
 		
 		
 		JLabel lblIngresarGasto = new JLabel("Ingresar Gasto");
-		lblIngresarGasto.setBounds(67, 25, 177, 16);
+		lblIngresarGasto.setHorizontalAlignment(SwingConstants.CENTER);
+		lblIngresarGasto.setBounds(10, 25, 291, 16);
 		frmPresupuesto.getContentPane().add(lblIngresarGasto);
 		
 		JLabel lblIngresarDinero = new JLabel("A\u00F1adir cantidad de Ingresos");
-		lblIngresarDinero.setBounds(346, 25, 219, 16);
+		lblIngresarDinero.setHorizontalAlignment(SwingConstants.CENTER);
+		lblIngresarDinero.setBounds(311, 25, 271, 16);
 		frmPresupuesto.getContentPane().add(lblIngresarDinero);
 		
 		txtIngreso = new JTextField();
-		txtIngreso.setBounds(364, 54, 116, 22);
+		txtIngreso.setBounds(386, 53, 128, 22);
 		frmPresupuesto.getContentPane().add(txtIngreso);
 		txtIngreso.setColumns(10);
 		
@@ -126,41 +129,41 @@ public class graph {
 		txtNombre.setColumns(10);
 		
 		JLabel lblTipoDeGasto = new JLabel("Tipo de Gasto:");
-		lblTipoDeGasto.setBounds(23, 94, 128, 16);
+		lblTipoDeGasto.setBounds(23, 95, 77, 16);
 		frmPresupuesto.getContentPane().add(lblTipoDeGasto);
 		
 		btnIngresarCantidad = new JButton("Ingresar Cantidad de Ingresos");
-		btnIngresarCantidad.setBounds(331, 90, 213, 25);
+		btnIngresarCantidad.setBounds(345, 91, 213, 25);
 		frmPresupuesto.getContentPane().add(btnIngresarCantidad);
 		btnIngresarCantidad.addActionListener(new Listener());
 		
 		btnModificarGasto = new JButton("Modificar Gasto");
-		btnModificarGasto.setBounds(346, 235, 168, 25);
+		btnModificarGasto.setBounds(370, 235, 168, 25);
 		frmPresupuesto.getContentPane().add(btnModificarGasto);
 		btnModificarGasto.addActionListener(new Listener());
 		
 		btnGraficar = new JButton("Graficar");
-		btnGraficar.setBounds(364, 184, 97, 25);
+		btnGraficar.setBounds(386, 184, 128, 25);
 		frmPresupuesto.getContentPane().add(btnGraficar);
 		btnGraficar.addActionListener(new Listener());
 		
 		cmbTipo = new JComboBox();
-		cmbTipo.setModel(new DefaultComboBoxModel(new String[] {"Ocio","Servicios","Comida","Estudios", "Otro"}));
-		cmbTipo.setBounds(133, 91, 132, 22);
+		cmbTipo.setModel(new DefaultComboBoxModel(new String[] {"Ocio","Servicios","Comida","Estudios", "Otros"}));
+		cmbTipo.setBounds(155, 91, 132, 22);
 		frmPresupuesto.getContentPane().add(cmbTipo);
 		
 		JLabel lblCosto = new JLabel("Costo del gasto:");
 		lblCosto.setToolTipText("Cantidad monetaria que gast\u00F3");
-		lblCosto.setBounds(10, 128, 103, 16);
+		lblCosto.setBounds(23, 128, 103, 16);
 		frmPresupuesto.getContentPane().add(lblCosto);
 		
 		textCant = new JTextField();
-		textCant.setBounds(136, 125, 165, 22);
+		textCant.setBounds(133, 125, 168, 22);
 		frmPresupuesto.getContentPane().add(textCant);
 		textCant.setColumns(10);
 		
-		JLabel lblNombre = new JLabel("Gasto (Comentario):");
-		lblNombre.setBounds(10, 57, 116, 16);
+		JLabel lblNombre = new JLabel("Describa su gasto:");
+		lblNombre.setBounds(10, 57, 113, 16);
 		frmPresupuesto.getContentPane().add(lblNombre);
 		
 		JLabel lblDia = new JLabel("Dia:");
@@ -170,6 +173,9 @@ public class graph {
 		cmbDia = new JComboBox();
 		cmbDia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				/**
+				 * Inicia la Programación defensiva para fechas mal ingresadas
+				 */
 				if((cmbDia.getSelectedItem()=="31")&&(cmbMes.getSelectedItem()=="Marzo")){
 			 		JOptionPane.showMessageDialog(frmPresupuesto,
 			 			    "La fecha no es valida",
@@ -243,12 +249,15 @@ public class graph {
 				}
 			}
 		});
+		/**
+		 * Finaliza la Programación defensiva para fechas mal ingresadas
+		 */
 		cmbDia.setModel(new DefaultComboBoxModel(new String[] {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31",}));
 		cmbDia.setBounds(70, 170, 56, 22);
 		frmPresupuesto.getContentPane().add(cmbDia);
 		
 		JLabel lblMes = new JLabel("Mes:");
-		lblMes.setBounds(138, 173, 35, 16);
+		lblMes.setBounds(140, 173, 35, 16);
 		frmPresupuesto.getContentPane().add(lblMes);
 		
 		cmbMes = new JComboBox();
@@ -256,6 +265,9 @@ public class graph {
 		cmbMes.setBounds(185, 170, 89, 22);
 		frmPresupuesto.getContentPane().add(cmbMes);
 		cmbMes.addActionListener(new ActionListener() {
+			/**
+			 * Inicia la Programación defensiva para fechas mal ingresadas, y cambia la opcion de comboBox a una fecha válida.
+			 */
 			public void actionPerformed(ActionEvent arg0) {
 				if((cmbDia.getSelectedItem()=="31")&&(cmbMes.getSelectedItem()=="Marzo")){
 			 		JOptionPane.showMessageDialog(frmPresupuesto,
@@ -331,48 +343,44 @@ public class graph {
 				}
 			}
 		});
-		
+		/**
+		 * Finaliza la Programación Defensiva para fechas mal ingresadas
+		 */
 		btnVerDatos = new JButton("Ver Datos");
-		btnVerDatos.setBounds(364, 135, 128, 25);
+		btnVerDatos.setBounds(386, 136, 128, 25);
 		frmPresupuesto.getContentPane().add(btnVerDatos);
 		btnVerDatos.addActionListener(new Listener());
 		
-		JLabel lblPeriodicidad = new JLabel("Periodicidad:");
-		lblPeriodicidad.setBounds(23, 217, 103, 16);
-		frmPresupuesto.getContentPane().add(lblPeriodicidad);
-		
-		comboBoxTiempo = new JComboBox();
-		comboBoxTiempo.setModel(new DefaultComboBoxModel(new String[] {"Ninguna","Diaria","Semanal","Mensual","Anual"}));
-		comboBoxTiempo.setBounds(158, 214, 116, 22);
-		frmPresupuesto.getContentPane().add(comboBoxTiempo);
-		
 		btnAniadirGasto = new JButton("A\u00F1adir Gasto");
-		btnAniadirGasto.setBounds(94, 261, 132, 25);
+		btnAniadirGasto.setBounds(92, 235, 132, 25);
 		frmPresupuesto.getContentPane().add(btnAniadirGasto);
 		btnAniadirGasto.addActionListener(new Listener());
 		
 		lblMonto = new JLabel("");
-		lblMonto.setBounds(422, 261, 200, 50);
+		lblMonto.setBounds(437, 261, 200, 50);
 		frmPresupuesto.getContentPane().add(lblMonto);
 		lblMonto.setText(""+operaciones.getMonto());
 		
 		JLabel lblSaldoTotal = new JLabel("Saldo Total:");
-		lblSaldoTotal.setBounds(309, 279, 89, 14);
+		lblSaldoTotal.setBounds(338, 279, 89, 14);
 		frmPresupuesto.getContentPane().add(lblSaldoTotal);
+		
+		JSeparator separator = new JSeparator();
+		separator.setOrientation(SwingConstants.VERTICAL);
+		separator.setBounds(311, 25, 1, 261);
+		frmPresupuesto.getContentPane().add(separator);
 		
 		
 	}
-	/**
-	*Listener del boton aniadirgasto
-	*/
-	
 	class Listener implements ActionListener{
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			 if (e.getSource() == btnAniadirGasto) {
 					 	try{
-					 		
+					 		/**
+					 		 * Añadir gasto desde la interfaz con el boton btnAniadirGasto (Con programación defensiva)
+					 		 */
 					 	Integer.parseInt(textCant.getText());
 					 	operaciones.setGasto(Integer.parseInt(textCant.getText()), txtNombre.getText(), cmbTipo.getSelectedItem().toString(), Integer.parseInt(cmbDia.getSelectedItem().toString()), cmbMes.getSelectedItem().toString());
 					 	textCant.setText("");
@@ -397,15 +405,21 @@ public class graph {
 					 	}
 					 	
 			 } 	
+			 /**
+			  * Grafica de gastos según las categorías.
+			  */
 			 if (e.getSource() == btnGraficar) {
 				 	JFrame grafica = new JFrame("");
-				 	double[] n= new double[4];
-				 	//Esta instruccion es para darle datos a la grafica
+				 	double[] n= new double[5];
+				 	/**
+				 	 * Esta instruccion es para darle datos a la grafica
+				 	 */
 				 	n = operaciones.setDraw();
 				 	datos.addValue(n[0],"Ocio","Ocio");
 				 	datos.addValue(n[1],"Estudios","Estudios");
 				 	datos.addValue(n[2],"Servicios","Servicios");
 				 	datos.addValue(n[3],"Comida","Comida");
+				 	datos.addValue(n[4],"Otros","Otros");
 				 	
 				 	ChartPanel Panel= new ChartPanel(Grafica);
 				 	
@@ -416,17 +430,23 @@ public class graph {
 					grafica.setBounds(100, 100, 598, 346);
 					grafica.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		        }
-		        
+			 /**
+			  * Accion para llamar a la JFrame para ver los datos en la base de Datos
+			  */
 		     if (e.getSource() == btnVerDatos) {
 		    	data data = new data();
 		        data.setVisible(true);	
 		        }
-		        
+		     /**
+		      * Accion para llamar a la JFrame que permite modificar los datos en la base de datos
+		      */
 		     if (e.getSource() == btnModificarGasto) {
 		    	 Modificar mod = new Modificar();
 		        mod.setVisible(true);
 		        }
-		        
+		     /**
+		      * Acciones para añadir Ingresos a la base de datos
+		      */
 		     if (e.getSource() == btnIngresarCantidad) {
 		    	 try{
 		    	 	operaciones.aniadirMonto(Integer.parseInt(txtIngreso.getText()));

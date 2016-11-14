@@ -16,21 +16,23 @@ public class draw {
 	public double servicios;
 	public double comida;
 	public double estudios;
+	public double otros;
 /**
 *Constructor de la clase draw 
 */
-	public draw(double ocio, double servicios, double comida, double estudios) {
+	public draw(double ocio, double servicios, double comida, double estudios, double otros) {
 		this.total = 0;
 		this.ocio = ocio;
 		this.servicios = servicios;
 		this.comida = comida;
 		this.estudios = estudios;
+		this.otros= otros;
 	}
 /**
 *metodo que saca el dinero total en double de todos los gastos
 */	
 	public void setTotal(){
-		total = ocio+ servicios+ comida + estudios;
+		total = ocio+ servicios+ comida + estudios + otros;
 	}
 /**
 *metodo que regresa el total de los gastos

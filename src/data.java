@@ -17,7 +17,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.table.DefaultTableModel;
 /**
-*Esta clase se encarga de crear la GUI encargada para que el usuario pueda ver los datos en la base de datos
+*Esta clase se encarga de crear la GUI encargada para que el usuario pueda ver los datos en la base de datos "dinero"
 *@author: Javier Andres Ramos Galvez 16230 
 *@author: Rodrigo Stuardo Juarez Jui 16073 
 *@author: Rodrigo Javier Albizures Lopez 16767
@@ -53,11 +53,14 @@ public class data extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		/**
+		 * Inicia la programación para conectar la JTable con la base de datos "dinero" para mostrar la información en la tabla
+		 */
 		Vector columnNames = new Vector();
 		Vector data = new Vector();
 		try {
             con = DriverManager.getConnection("jdbc:mysql://" + "localhost"
-                    + ":3306/mydb", "root", "");
+                    + ":3306/mydb", "root", ""); //Se conecta a la base de datos (cambiar contraseña en las ultimas comillas)
 
             String sql = "select * from dinero";
             Statement stmt = con.createStatement();
@@ -84,7 +87,9 @@ public class data extends JFrame {
         } catch (Exception e) {
             System.out.println(e);
         }
-		
+		/**
+		 * Finaliza la programación para crear la tabla que contiene la información de la base de datos "dinero"
+		 */
 		JLabel lblDatos = new JLabel("DATOS");
 		lblDatos.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDatos.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -95,6 +100,9 @@ public class data extends JFrame {
 		scrollPane.setBounds(34, 45, 558, 192);
 		contentPane.add(scrollPane);
 		
+		/**
+		 * Añade en los campos requeridos de la tabla los datos de la base de Datos
+		 */
 		JTable table = new JTable(data, columnNames) {
             public Class getColumnClass(int column) {
                 for (int row = 0; row < getRowCount(); row++) {
