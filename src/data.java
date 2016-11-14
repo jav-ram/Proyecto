@@ -60,7 +60,7 @@ public class data extends JFrame {
 		Vector data = new Vector();
 		try {
             con = DriverManager.getConnection("jdbc:mysql://" + "localhost"
-                    + ":3306/mydb", "root", ""); //Se conecta a la base de datos (cambiar contraseña en las ultimas comillas)
+                    + ":3306/mydb", "root", "root"); //Se conecta a la base de datos (cambiar contraseña en las ultimas comillas)
 
             String sql = "select * from dinero";
             Statement stmt = con.createStatement();

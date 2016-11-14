@@ -13,8 +13,14 @@ import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.Statement;
 import java.time.Year;
 import java.util.InputMismatchException;
+import java.util.Vector;
 /**
 *Esta clase se encarga de crear la GUI para el boton de modificar gasto
 *@author: Javier Andres Ramos Galvez 16230 
@@ -35,6 +41,8 @@ public class Modificar extends JFrame {
 	private JComboBox cmbTipoM;
 	private JButton btnModificarGasto;
 	int anio = Year.now().getValue();
+	private Connection con = null;
+	private Calculos operaciones;
 
 	/**
 	 * Launch the application.
@@ -56,6 +64,9 @@ public class Modificar extends JFrame {
 	 * Create the frame.
 	 */
 	public Modificar() {
+		
+		operaciones = new Calculos();
+		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 399, 264);
 		contentPane = new JPanel();
@@ -281,6 +292,46 @@ public class Modificar extends JFrame {
 		btnEliminarGasto.setBounds(200, 177, 161, 41);
 		contentPane.add(btnEliminarGasto);
 		btnModificarGasto.addActionListener(new Listener());
+		
+		Vector columnNames = new Vector();
+		Vector data = new Vector();
+		try {
+            con = DriverManager.getConnection("jdbc:mysql://" + "localhost"
+                    + ":3306/mydb", "root", "root");
+
+            String sql = "select * from dinero";
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            ResultSetMetaData md = rs.getMetaData();
+            int columns = md.getColumnCount();
+            for (int i = 1; i <= columns; i++) {
+                columnNames.addElement(md.getColumnName(i));
+            }
+
+            while (rs.next()) {
+                Vector row = new Vector(columns);
+
+                for (int i = 1; i <= columns; i++) {
+                    row.addElement(rs.getObject(i));
+                }
+
+                data.addElement(row);
+            }
+
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+		
+		int x=0;
+		while (x< data.size()){
+			comboBoxModificar.addItem(data.elementAt(x));
+			x++;	
+		}
+		
+		
 	}
 	class Listener implements ActionListener{
 
@@ -289,11 +340,11 @@ public class Modificar extends JFrame {
 			// TODO Auto-generated method stub
 			if(e.getSource()==btnModificarGasto){
 				try{
+					int id=comboBoxModificar.getSelectedIndex();
 				 	Integer.parseInt(textCantM.getText());
-				 	
+				 	operaciones.updateGasto(Integer.parseInt(textCantM.getText()), txtNombreM.getText(), cmbTipoM.getSelectedItem().toString(), Integer.parseInt(cmbDiaM.getSelectedItem().toString()), cmbMesM.getSelectedItem().toString(), id);
 				 	textCantM.setText("");
 				 	txtNombreM.setText("");
-				 	
 				 	}
 				 	catch(InputMismatchException e1){
 				 		e1.printStackTrace();
