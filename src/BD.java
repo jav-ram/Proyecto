@@ -31,7 +31,7 @@ public class BD {
  		
  		url = "jdbc:mysql://localhost/mydb";
  	 	us="root";
- 	 	psw= "root";
+ 	 	psw= "uvg";
 
  	}
 	

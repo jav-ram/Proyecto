@@ -54,13 +54,13 @@ public class data extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		/**
-		 * Inicia la programación para conectar la JTable con la base de datos "dinero" para mostrar la información en la tabla
+		 * Inicia la programaciï¿½n para conectar la JTable con la base de datos "dinero" para mostrar la informaciï¿½n en la tabla
 		 */
 		Vector columnNames = new Vector();
 		Vector data = new Vector();
 		try {
             con = DriverManager.getConnection("jdbc:mysql://" + "localhost"
-                    + ":3306/mydb", "root", "root"); //Se conecta a la base de datos (cambiar contraseña en las ultimas comillas)
+                    + ":3306/mydb", "root", "uvg"); //Se conecta a la base de datos (cambiar contraseï¿½a en las ultimas comillas)
 
             String sql = "select * from dinero";
             Statement stmt = con.createStatement();
@@ -88,7 +88,7 @@ public class data extends JFrame {
             System.out.println(e);
         }
 		/**
-		 * Finaliza la programación para crear la tabla que contiene la información de la base de datos "dinero"
+		 * Finaliza la programaciï¿½n para crear la tabla que contiene la informaciï¿½n de la base de datos "dinero"
 		 */
 		JLabel lblDatos = new JLabel("DATOS");
 		lblDatos.setHorizontalAlignment(SwingConstants.CENTER);
@@ -101,7 +101,7 @@ public class data extends JFrame {
 		contentPane.add(scrollPane);
 		
 		/**
-		 * Añade en los campos requeridos de la tabla los datos de la base de Datos
+		 * Aï¿½ade en los campos requeridos de la tabla los datos de la base de Datos
 		 */
 		JTable table = new JTable(data, columnNames) {
             public Class getColumnClass(int column) {

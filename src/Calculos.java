@@ -1,5 +1,9 @@
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import com.mysql.*;
 import com.mysql.jdbc.PreparedStatement;
@@ -22,9 +26,15 @@ public class Calculos {
 	
 	private BD mydb;
 	private draw grafica;
+	private Date fechaActual;
+	private DateFormat formato;
+	private Calendar fecha;
 
 	public Calculos() {
 		mydb = new BD();
+		fechaActual = new Date();
+		formato = new SimpleDateFormat("dd/MM/yyyy");
+		fecha = Calendar.getInstance();
 	}
 
 
@@ -123,7 +133,7 @@ public class Calculos {
  		String monto=null;
  		java.sql.Statement st = null;
  		String s=new String();
- 		
+ 		int mes = fecha.get(Calendar.MONTH)+1;
  		//* Crea el statement
 	 	try {
 			st = mydb.getCon().createStatement();
@@ -134,7 +144,7 @@ public class Calculos {
  		
  		//* Hace la consulta
 	 	try{
-		 	s = "Select * from Monto where idMonto = 1;";
+		 	s = "Select * from Monto where idMonto = "+mes+";";
         	try {
         		ResultSet rs=st.executeQuery(s);
         		while (rs.next())
@@ -186,11 +196,13 @@ public class Calculos {
 	*/
 	
  	public void updateMonto(int cant){
- 		 
+ 		
  		java.sql.Statement st = null;
  		String s=new String();
  		int monto = Integer.parseInt(getMonto());
  		monto -= cant;
+ 		int mes = fecha.get(Calendar.MONTH)+1;
+ 		System.out.println(mes);
  		//* Crea el statement
 	 	try {
 			st = mydb.getCon().createStatement();
@@ -202,7 +214,7 @@ public class Calculos {
  		//* Hace la consulta
 	 	PreparedStatement updateEXP;
 		try {
-			updateEXP = (PreparedStatement) mydb.getCon().prepareStatement("update Monto set monto = "+ monto +";");
+			updateEXP = (PreparedStatement) mydb.getCon().prepareStatement("update Monto set monto = "+ monto +" where idMonto = "+mes+";");
 			int updateEXP_done = updateEXP.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
