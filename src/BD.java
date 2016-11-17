@@ -31,7 +31,7 @@ public class BD {
  		
  		url = "jdbc:mysql://localhost/mydb";
  	 	us="root";
- 	 	psw= "uvg";
+ 	 	psw= "";
 
  	}
 	
@@ -118,8 +118,8 @@ public class BD {
 	
 	
 	
- 	public int getGasto(java.sql.Statement st,String s ,String tipo){
- 		int n=0;
+ 	public double getGasto(java.sql.Statement st,String s ,String tipo){
+ 		double n=0;
  		
  		//* Hace la consulta
 	 	try{
@@ -129,7 +129,7 @@ public class BD {
         		while (rs.next())
         	      {
         	        String id = rs.getString("CantDinero");
-        	        n = Integer.parseInt(id)+n;
+        	        n = Double.parseDouble(id)+n;
         	        // print the results
         	      }
         		

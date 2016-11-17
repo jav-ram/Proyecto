@@ -341,8 +341,8 @@ public class Modificar extends JFrame {
 			if(e.getSource()==btnModificarGasto){
 				try{
 					int id=comboBoxModificar.getSelectedIndex();
-				 	Integer.parseInt(textCantM.getText());
-				 	operaciones.updateGasto(Integer.parseInt(textCantM.getText()), txtNombreM.getText(), cmbTipoM.getSelectedItem().toString(), Integer.parseInt(cmbDiaM.getSelectedItem().toString()), cmbMesM.getSelectedItem().toString(), id);
+				 	Double.parseDouble(textCantM.getText());
+				 	operaciones.updateGasto(Double.parseDouble(textCantM.getText()), txtNombreM.getText(), cmbTipoM.getSelectedItem().toString(), Integer.parseInt(cmbDiaM.getSelectedItem().toString()), cmbMesM.getSelectedItem().toString(), id);
 				 	textCantM.setText("");
 				 	txtNombreM.setText("");
 				 	}

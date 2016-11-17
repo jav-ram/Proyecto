@@ -381,11 +381,11 @@ public class graph {
 					 		/**
 					 		 * Añadir gasto desde la interfaz con el boton btnAniadirGasto (Con programación defensiva)
 					 		 */
-					 	Integer.parseInt(textCant.getText());
-					 	operaciones.setGasto(Integer.parseInt(textCant.getText()), txtNombre.getText(), cmbTipo.getSelectedItem().toString(), Integer.parseInt(cmbDia.getSelectedItem().toString()), cmbMes.getSelectedItem().toString());
+					 	Double.parseDouble(textCant.getText());
+					 	operaciones.setGasto(Double.parseDouble(textCant.getText()), txtNombre.getText(), cmbTipo.getSelectedItem().toString(), Integer.parseInt(cmbDia.getSelectedItem().toString()), cmbMes.getSelectedItem().toString());
 					 	textCant.setText("");
 					 	txtNombre.setText("");
-					 	lblMonto.setText(""+operaciones.getMonto());
+					 	lblMonto.setText(String.valueOf(operaciones.getMonto()));
 					 	}
 					 	catch(InputMismatchException e1){
 					 		e1.printStackTrace();
@@ -449,8 +449,8 @@ public class graph {
 		      */
 		     if (e.getSource() == btnIngresarCantidad) {
 		    	 try{
-		    	 	operaciones.aniadirMonto(Integer.parseInt(txtIngreso.getText()));
-		    	 	lblMonto.setText(""+operaciones.getMonto());
+		    	 	operaciones.aniadirMonto(Double.parseDouble(txtIngreso.getText()));
+		    	 	lblMonto.setText(String.valueOf(operaciones.getMonto()));
 		    	 }
 		    	 catch(InputMismatchException e1){
 		    		 e1.printStackTrace();

@@ -47,8 +47,8 @@ public class Calculos {
 	*/
 	
 	
- 	public int getGasto(java.sql.Statement st,String s ,String tipo){
- 		int n=0;
+ 	public double getGasto(java.sql.Statement st,String s ,String tipo){
+ 		double n=0;
  		//* Hace la consulta
 	 	try{
 		 	s = "Select * from Dinero where Tipo = '"+ tipo +"';";
@@ -57,7 +57,7 @@ public class Calculos {
         		while (rs.next())
         	      {
         	        String id = rs.getString("CantDinero");
-        	        n = Integer.parseInt(id)+n;
+        	        n = Double.parseDouble(id)+n;
         	        // print the results
         	      }
         		
@@ -129,8 +129,8 @@ public class Calculos {
 	*/
 	
 	
- 	public String getMonto(){
- 		String monto=null;
+ 	public double getMonto(){
+ 		double monto=0;
  		java.sql.Statement st = null;
  		String s=new String();
  		int mes = fecha.get(Calendar.MONTH)+1;
@@ -150,7 +150,7 @@ public class Calculos {
         		while (rs.next())
         	      {
         	        String id = rs.getString("monto");
-        	        monto= id;
+        	        monto= Double.parseDouble(id);
         	        // print the results
         	      }
         		
@@ -166,7 +166,7 @@ public class Calculos {
  	}
  	
  	
- 	public void updateGasto(int cant, String nom, String tipo, int dia, String mes, int id){
+ 	public void updateGasto(double cant, String nom, String tipo, int dia, String mes, int id){
  		java.sql.Statement st= null;
  		String s=new String();
  		int x= id+1;
@@ -195,14 +195,13 @@ public class Calculos {
 	*Metodo que actualiza los datos de la base de datos
 	*/
 	
- 	public void updateMonto(int cant){
+ 	public void updateMonto(double cant){
  		
  		java.sql.Statement st = null;
  		String s=new String();
- 		int monto = Integer.parseInt(getMonto());
+ 		double monto = getMonto();
  		monto -= cant;
  		int mes = fecha.get(Calendar.MONTH)+1;
- 		System.out.println(mes);
  		//* Crea el statement
 	 	try {
 			st = mydb.getCon().createStatement();
@@ -230,7 +229,7 @@ public class Calculos {
 	
 	
 	
- 	public void setGasto(int cant,String nom, String tipo, int dia, String mes){
+ 	public void setGasto(double cant,String nom, String tipo, int dia, String mes){
  		java.sql.Statement st = null;
 	 	
  		updateMonto(cant);
@@ -243,7 +242,7 @@ public class Calculos {
 		}
 	 	
 	 	try{
-	 		int monto;
+	 		double monto;
 	 		
 	 		String s;
 		 	s = "INSERT INTO Dinero VALUES (0,"+ cant +" , '" + nom +"', '"+ tipo +"',"+ dia +",'"+ mes +"');";
@@ -259,11 +258,11 @@ public class Calculos {
  	}
  	
  	
- 	public void aniadirMonto(int cant){
+ 	public void aniadirMonto(double cant){
 		 
  		java.sql.Statement st = null;
  		String s=new String();
- 		int monto = Integer.parseInt(getMonto());
+ 		double monto = getMonto();
  		monto += cant;
  		//* Crea el statement
 	 	try {
