@@ -167,6 +167,7 @@ public class Calculos {
  	
  	
  	/**
+ 	 * Metodo para modificar un gasto en especifico
  	 * @param cant
  	 * @param nom
  	 * @param tipo
@@ -308,6 +309,23 @@ public class Calculos {
 		}
 	    
  		
+ 	}
+ 	
+ 	public void eliminar(int id){
+ 		java.sql.Statement st= null;
+ 		String s= new String();
+ 		try {
+ 			st = mydb.getCon().createStatement();
+ 		}catch (SQLException e){
+ 			e.printStackTrace();
+ 		}
+ 		PreparedStatement deleteEXP;
+ 		try {
+ 			deleteEXP= (PreparedStatement) mydb.getCon().prepareStatement("delete from dinero where idDinero= '"+(id+1)+"';");
+ 			int deleteEXP_done=  deleteEXP.executeUpdate();
+ 		}catch (SQLException e){
+ 			e.printStackTrace();
+ 		}
  	}
  	
  	

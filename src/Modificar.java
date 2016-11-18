@@ -40,6 +40,7 @@ public class Modificar extends JFrame {
 	private JComboBox cmbMesM;
 	private JComboBox cmbTipoM;
 	private JButton btnModificarGasto;
+	private JButton btnEliminarGasto;
 	int anio = Year.now().getValue();
 	private Connection con = null;
 	private Calculos operaciones;
@@ -287,11 +288,13 @@ public class Modificar extends JFrame {
 		btnModificarGasto.setBounds(29, 177, 161, 41);
 		contentPane.add(btnModificarGasto);
 		
-		JButton btnEliminarGasto = new JButton("Eliminar Gasto");
+		btnEliminarGasto = new JButton("Eliminar Gasto");
 		btnEliminarGasto.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnEliminarGasto.setBounds(200, 177, 161, 41);
 		contentPane.add(btnEliminarGasto);
+		
 		btnModificarGasto.addActionListener(new Listener());
+		btnEliminarGasto.addActionListener(new Listener());
 		
 		Vector columnNames = new Vector();
 		Vector data = new Vector();
@@ -335,13 +338,16 @@ public class Modificar extends JFrame {
 	}
 	class Listener implements ActionListener{
 
+		/* 
+		 * Manda los datos a Calculos para modificar la base de datos
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			if(e.getSource()==btnModificarGasto){
 				try{
 					int id=comboBoxModificar.getSelectedIndex();
-					
 				 	Double.parseDouble(textCantM.getText());
 				 	operaciones.updateGasto(Double.parseDouble(textCantM.getText()), txtNombreM.getText(), cmbTipoM.getSelectedItem().toString(), Integer.parseInt(cmbDiaM.getSelectedItem().toString()), cmbMesM.getSelectedItem().toString(), id);
 				 	textCantM.setText("");
@@ -363,6 +369,10 @@ public class Modificar extends JFrame {
 				 			    "Error",
 				 			    JOptionPane.ERROR_MESSAGE);
 				 	}
+			}
+			if (e.getSource()== btnEliminarGasto){
+				int id= comboBoxModificar.getSelectedIndex();
+				operaciones.eliminar(id);
 			}
 		}
 		
