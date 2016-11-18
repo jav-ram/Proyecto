@@ -166,6 +166,14 @@ public class Calculos {
  	}
  	
  	
+ 	/**
+ 	 * @param cant
+ 	 * @param nom
+ 	 * @param tipo
+ 	 * @param dia
+ 	 * @param mes
+ 	 * @param id
+ 	 */
  	public void updateGasto(double cant, String nom, String tipo, int dia, String mes, int id){
  		java.sql.Statement st= null;
  		String s=new String();
@@ -176,6 +184,23 @@ public class Calculos {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
+
+ 		try {
+ 			s= "Select * from dinero where idDinero= '"+x+"';";
+ 			try{
+ 				ResultSet rs = st.executeQuery(s);
+ 				while (rs.next()){
+ 					String i = rs.getString("CantDinero");
+ 					double orig= Double.parseDouble(i);
+ 					updateMonto(cant-orig);
+      	      }
+ 			}catch(SQLException e1){
+ 				e1.printStackTrace();
+ 			}
+ 		}catch(Exception exc){
+ 			exc.printStackTrace();
+ 		}
+ 		
  		//UPDATE table_name SET field1=new-value1, field2=new-value2
  		//		[WHERE Clause]
  		PreparedStatement updateExp;

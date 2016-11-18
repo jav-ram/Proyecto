@@ -52,7 +52,7 @@ DROP TABLE IF EXISTS `Monto`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Monto` (
   `idMonto` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `monto` int(11) DEFAULT NULL,
+  `monto` double DEFAULT NULL,
   `mes` int(11) DEFAULT NULL,
   PRIMARY KEY (`idMonto`)
 ) ENGINE=InnoDB AUTO_INCREMENT=125 DEFAULT CHARSET=utf8;
