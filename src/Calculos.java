@@ -30,6 +30,9 @@ public class Calculos {
 	private DateFormat formato;
 	private Calendar fecha;
 
+	/**
+	 * 
+	 */
 	public Calculos() {
 		mydb = new BD();
 		fechaActual = new Date();
@@ -326,6 +329,22 @@ public class Calculos {
  			st = mydb.getCon().createStatement();
  		}catch (SQLException e){
  			e.printStackTrace();
+ 		}
+ 		
+ 		try {
+ 			s= "Select * from dinero where idDinero= '"+id+"';";
+ 			try{
+ 				ResultSet rs = st.executeQuery(s);
+ 				while (rs.next()){
+ 					String i = rs.getString("CantDinero");
+ 					double orig= Double.parseDouble(i);
+ 					updateMonto(-orig);
+      	      }
+ 			}catch(SQLException e1){
+ 				e1.printStackTrace();
+ 			}
+ 		}catch(Exception exc){
+ 			exc.printStackTrace();
  		}
  		PreparedStatement deleteEXP;
  		try {
