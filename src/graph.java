@@ -1,3 +1,4 @@
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +11,7 @@ import java.util.InputMismatchException;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import org.jfree.chart.ChartFactory;
@@ -21,11 +23,17 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 
+
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
+import java.awt.Font;
 
 /**
 *Esta clase grafica los datos de la base de datos
@@ -33,6 +41,7 @@ import javax.swing.SwingConstants;
 *@author: Rodrigo Stuardo Juarez Jui 16073 
 *@author: Rodrigo Javier Albizures Lopez 16767
 *@author: Jose Rodolfo Perez Garcia 16056
+*@author: Rocio Loarca 16329
 *@version: 11/2/2016
 */
 
@@ -63,6 +72,9 @@ public class graph {
 	private Calculos operaciones;
 	private JLabel lblMonto;
 	int anio = Year.now().getValue();
+	private JLabel lblDineroGastado;
+	private JButton btnCalcularMes;
+	private JComboBox cmbCalcularMes;
 	
 	DefaultCategoryDataset datos= new DefaultCategoryDataset();
 
@@ -102,17 +114,20 @@ public class graph {
 		
 		frmPresupuesto = new JFrame();
 		frmPresupuesto.setTitle("Organizacion de Presupuesto");
-		frmPresupuesto.setBounds(100, 100, 598, 346);
+		frmPresupuesto.setBounds(100, 100, 598, 433);
 		frmPresupuesto.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmPresupuesto.getContentPane().setLayout(null);
 		
 		
+		
 		JLabel lblIngresarGasto = new JLabel("Ingresar Gasto");
+		lblIngresarGasto.setFont(new Font("Century Gothic", Font.BOLD, 14));
 		lblIngresarGasto.setHorizontalAlignment(SwingConstants.CENTER);
 		lblIngresarGasto.setBounds(10, 25, 291, 16);
 		frmPresupuesto.getContentPane().add(lblIngresarGasto);
 		
 		JLabel lblIngresarDinero = new JLabel("A\u00F1adir cantidad de Ingresos");
+		lblIngresarDinero.setFont(new Font("Century Gothic", Font.BOLD, 14));
 		lblIngresarDinero.setHorizontalAlignment(SwingConstants.CENTER);
 		lblIngresarDinero.setBounds(311, 25, 271, 16);
 		frmPresupuesto.getContentPane().add(lblIngresarDinero);
@@ -174,27 +189,28 @@ public class graph {
 		cmbDia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				/**
-				 * Inicia la Programación defensiva para fechas mal ingresadas
+				 * Inicia la Programaciï¿½n defensiva para fechas mal ingresadas
 				 */
 				if((cmbDia.getSelectedItem()=="31")&&(cmbMes.getSelectedItem()=="Marzo")){
 			 		JOptionPane.showMessageDialog(frmPresupuesto,
 			 			    "La fecha no es valida",
 			 			    "Error",
 			 			    JOptionPane.ERROR_MESSAGE);
+			 		cmbDia.setSelectedItem("30"); //Cambia el dï¿½a mal colocado por el ï¿½ltimo dï¿½a del mes correspondiente
 				}
 				if((cmbDia.getSelectedItem()=="31")&&(cmbMes.getSelectedItem()=="Abril")){
 			 		JOptionPane.showMessageDialog(frmPresupuesto,
 			 			    "La fecha no es valida",
 			 			    "Error",
 			 			    JOptionPane.ERROR_MESSAGE);
-			 		cmbDia.setSelectedItem("30");
+			 		cmbDia.setSelectedItem("30"); //Cambia el dï¿½a mal colocado por el ï¿½ltimo dï¿½a del mes correspondiente
 				}
 				if((cmbDia.getSelectedItem()=="31")&&(cmbMes.getSelectedItem()=="Junio")){
 			 		JOptionPane.showMessageDialog(frmPresupuesto,
 			 			    "La fecha no es valida",
 			 			    "Error",
 			 			    JOptionPane.ERROR_MESSAGE);
-			 		cmbDia.setSelectedItem("30");
+			 		cmbDia.setSelectedItem("30"); //Cambia el dï¿½a mal colocado por el ï¿½ltimo dï¿½a del mes correspondiente
 				}
 				if((cmbDia.getSelectedItem()=="31")&&(cmbMes.getSelectedItem()=="Septiembre")){
 					System.err.println("El valor ingresado no es un numero");
@@ -202,14 +218,14 @@ public class graph {
 			 			    "La fecha no es valida",
 			 			    "Error",
 			 			    JOptionPane.ERROR_MESSAGE);
-			 		cmbDia.setSelectedItem("30");
+			 		cmbDia.setSelectedItem("30"); //Cambia el dï¿½a mal colocado por el ï¿½ltimo dï¿½a del mes correspondiente
 				}
 				if((cmbDia.getSelectedItem()=="31")&&(cmbMes.getSelectedItem()=="Noviembre")){
 			 		JOptionPane.showMessageDialog(frmPresupuesto,
 			 			    "La fecha no es valida",
 			 			    "Error",
 			 			    JOptionPane.ERROR_MESSAGE);
-			 		cmbDia.setSelectedItem("30");
+			 		cmbDia.setSelectedItem("30"); //Cambia el dï¿½a mal colocado por el ï¿½ltimo dï¿½a del mes correspondiente
 				}
 				if((cmbDia.getSelectedItem()=="31")&&(cmbMes.getSelectedItem()=="Febrero")){
 			 		JOptionPane.showMessageDialog(frmPresupuesto,
@@ -217,7 +233,7 @@ public class graph {
 			 			    "Error",
 			 			    JOptionPane.ERROR_MESSAGE);
 			 		if((anio%4==0) && (anio%100==0)){
-			 			cmbDia.setSelectedItem("28");
+			 			cmbDia.setSelectedItem("28"); //Cambia el dï¿½a mal colocado por el ï¿½ltimo dï¿½a del mes de febrero si es bisiesto
 			 		}
 			 		if((anio%4==0) && (anio%100!=0)){
 			 			cmbDia.setSelectedItem("29");
@@ -229,10 +245,10 @@ public class graph {
 			 			    "Error",
 			 			    JOptionPane.ERROR_MESSAGE);
 			 		if((anio%4==0) && (anio%100==0)){
-			 			cmbDia.setSelectedItem("28");
+			 			cmbDia.setSelectedItem("28"); //Cambia el dï¿½a mal colocado por el ï¿½ltimo dï¿½a del mes de febrero, en caso que no sea bisiesto
 			 		}
 			 		if((anio%4==0) && (anio%100!=0)){
-			 			cmbDia.setSelectedItem("29");
+			 			cmbDia.setSelectedItem("29"); //Cambia el dï¿½a mal colocado por el ï¿½ltimo dï¿½a del mes de febrero si es bisiesto
 			 		}
 			 		
 				}
@@ -244,13 +260,13 @@ public class graph {
 					 			    "La fecha no es valida",
 					 			    "Error",
 					 			    JOptionPane.ERROR_MESSAGE);
-					 		cmbDia.setSelectedItem("28");
+					 		cmbDia.setSelectedItem("28"); //Cambia el dï¿½a mal colocado por el ï¿½ltimo dï¿½a del mes de febrero, en caso que no sea bisiesto
 					}
 				}
 			}
 		});
 		/**
-		 * Finaliza la Programación defensiva para fechas mal ingresadas
+		 * Finaliza la Programaciï¿½n defensiva para fechas mal ingresadas
 		 */
 		cmbDia.setModel(new DefaultComboBoxModel(new String[] {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31",}));
 		cmbDia.setBounds(70, 170, 56, 22);
@@ -266,7 +282,7 @@ public class graph {
 		frmPresupuesto.getContentPane().add(cmbMes);
 		cmbMes.addActionListener(new ActionListener() {
 			/**
-			 * Inicia la Programación defensiva para fechas mal ingresadas, y cambia la opcion de comboBox a una fecha válida.
+			 * Inicia la Programaciï¿½n defensiva para fechas mal ingresadas, y cambia la opcion de comboBox a una fecha vï¿½lida.
 			 */
 			public void actionPerformed(ActionEvent arg0) {
 				if((cmbDia.getSelectedItem()=="31")&&(cmbMes.getSelectedItem()=="Marzo")){
@@ -274,21 +290,21 @@ public class graph {
 			 			    "La fecha no es valida",
 			 			    "Error",
 			 			    JOptionPane.ERROR_MESSAGE);
-			 		cmbDia.setSelectedItem("30");
+			 		cmbDia.setSelectedItem("30"); //Cambia el dï¿½a mal colocado por el ï¿½ltimo dï¿½a del mes correspondiente
 				}
 				if((cmbDia.getSelectedItem()=="31")&&(cmbMes.getSelectedItem()=="Abril")){
 			 		JOptionPane.showMessageDialog(frmPresupuesto,
 			 			    "La fecha no es valida",
 			 			    "Error",
 			 			    JOptionPane.ERROR_MESSAGE);
-			 		cmbDia.setSelectedItem("30");
+			 		cmbDia.setSelectedItem("30"); //Cambia el dï¿½a mal colocado por el ï¿½ltimo dï¿½a del mes correspondiente
 				}
 				if((cmbDia.getSelectedItem()=="31")&&(cmbMes.getSelectedItem()=="Junio")){
 			 		JOptionPane.showMessageDialog(frmPresupuesto,
 			 			    "La fecha no es valida",
 			 			    "Error",
 			 			    JOptionPane.ERROR_MESSAGE);
-			 		cmbDia.setSelectedItem("30");
+			 		cmbDia.setSelectedItem("30"); //Cambia el dï¿½a mal colocado por el ï¿½ltimo dï¿½a del mes correspondiente
 				}
 				if((cmbDia.getSelectedItem()=="31")&&(cmbMes.getSelectedItem()=="Septiembre")){
 					System.err.println("El valor ingresado no es un numero");
@@ -296,14 +312,14 @@ public class graph {
 			 			    "La fecha no es valida",
 			 			    "Error",
 			 			    JOptionPane.ERROR_MESSAGE);
-			 		cmbDia.setSelectedItem("30");
+			 		cmbDia.setSelectedItem("30"); //Cambia el dï¿½a mal colocado por el ï¿½ltimo dï¿½a del mes correspondiente
 				}
 				if((cmbDia.getSelectedItem()=="31")&&(cmbMes.getSelectedItem()=="Noviembre")){
 			 		JOptionPane.showMessageDialog(frmPresupuesto,
 			 			    "La fecha no es valida",
 			 			    "Error",
 			 			    JOptionPane.ERROR_MESSAGE);
-			 		cmbDia.setSelectedItem("30");
+			 		cmbDia.setSelectedItem("30"); //Cambia el dï¿½a mal colocado por el ï¿½ltimo dï¿½a del mes de febrero si es bisiesto
 				}
 				if((cmbDia.getSelectedItem()=="31")&&(cmbMes.getSelectedItem()=="Febrero")){
 			 		JOptionPane.showMessageDialog(frmPresupuesto,
@@ -311,10 +327,10 @@ public class graph {
 			 			    "Error",
 			 			    JOptionPane.ERROR_MESSAGE);
 			 		if((anio%4==0) && (anio%100==0)){
-			 			cmbDia.setSelectedItem("28");
+			 			cmbDia.setSelectedItem("28"); //Cambia el dï¿½a mal colocado por el ï¿½ltimo dï¿½a del mes de febrero, en caso que no sea bisiesto
 			 		}
 			 		if((anio%4==0) && (anio%100!=0)){
-			 			cmbDia.setSelectedItem("29");
+			 			cmbDia.setSelectedItem("29"); //Cambia el dï¿½a mal colocado por el ï¿½ltimo dï¿½a del mes de febrero si es bisiesto
 			 		}
 				}
 				if((cmbDia.getSelectedItem()=="30")&&(cmbMes.getSelectedItem()=="Febrero")){
@@ -323,10 +339,10 @@ public class graph {
 			 			    "Error",
 			 			    JOptionPane.ERROR_MESSAGE);
 			 		if((anio%4==0) && (anio%100==0)){
-			 			cmbDia.setSelectedItem("28");
+			 			cmbDia.setSelectedItem("28"); //Cambia el dï¿½a mal colocado por el ï¿½ltimo dï¿½a del mes de febrero, en caso que no sea bisiesto
 			 		}
 			 		if((anio%4==0) && (anio%100!=0)){
-			 			cmbDia.setSelectedItem("29");
+			 			cmbDia.setSelectedItem("29"); //Cambia el dï¿½a mal colocado por el ï¿½ltimo dï¿½a del mes de febrero si es bisiesto
 			 		}
 			 		
 				}
@@ -338,13 +354,13 @@ public class graph {
 					 			    "La fecha no es valida",
 					 			    "Error",
 					 			    JOptionPane.ERROR_MESSAGE);
-					 		cmbDia.setSelectedItem("28");
+					 		cmbDia.setSelectedItem("28"); //Cambia el dï¿½a mal colocado por el ï¿½ltimo dï¿½a del mes de febrero, en caso que no sea bisiesto
 					}
 				}
 			}
 		});
 		/**
-		 * Finaliza la Programación Defensiva para fechas mal ingresadas
+		 * Finaliza la Programaciï¿½n Defensiva para fechas mal ingresadas
 		 */
 		btnVerDatos = new JButton("Ver Datos");
 		btnVerDatos.setBounds(386, 136, 128, 25);
@@ -357,7 +373,8 @@ public class graph {
 		btnAniadirGasto.addActionListener(new Listener());
 		
 		lblMonto = new JLabel("");
-		lblMonto.setBounds(437, 261, 200, 50);
+		lblMonto.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMonto.setBounds(403, 266, 95, 40);
 		frmPresupuesto.getContentPane().add(lblMonto);
 		lblMonto.setText(""+operaciones.getMonto());
 		
@@ -370,6 +387,35 @@ public class graph {
 		separator.setBounds(311, 25, 1, 261);
 		frmPresupuesto.getContentPane().add(separator);
 		
+		JLabel lblMesDineroGast = new JLabel("Elegir mes calcular dinero gastado");
+		lblMesDineroGast.setHorizontalAlignment(SwingConstants.LEFT);
+		lblMesDineroGast.setToolTipText("Cantidad monetaria que gast\u00F3");
+		lblMesDineroGast.setBounds(56, 329, 168, 16);
+		frmPresupuesto.getContentPane().add(lblMesDineroGast);
+		
+		btnCalcularMes = new JButton("Calcular");
+		btnCalcularMes.setBounds(367, 326, 89, 23);
+		frmPresupuesto.getContentPane().add(btnCalcularMes);
+		
+		lblDineroGastado = new JLabel("Q");
+		lblDineroGastado.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDineroGastado.setBounds(466, 322, 89, 30);
+		frmPresupuesto.getContentPane().add(lblDineroGastado);
+		btnCalcularMes.addActionListener(new Listener());
+		frmPresupuesto.setVisible(false);
+		
+		
+		cmbCalcularMes = new JComboBox();
+		cmbCalcularMes.setModel(new DefaultComboBoxModel(new String[] {"Enero", "Febrero ", "Marzo", "Abril", "Mayo ", "Junio", "Julio ", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"}));
+		cmbCalcularMes.setBounds(240, 326, 89, 22);
+		frmPresupuesto.getContentPane().add(cmbCalcularMes);
+		
+		lblDineroGastado.setText("");
+		
+		/**JScrollBar scrollBar = new JScrollBar();
+		scrollBar.setBounds(565, 0, 17, 394);
+		frmPresupuesto.getContentPane().add(scrollBar);
+		*/
 		
 	}
 	class Listener implements ActionListener{
@@ -379,8 +425,18 @@ public class graph {
 			 if (e.getSource() == btnAniadirGasto) {
 					 	try{
 					 		/**
-					 		 * Añadir gasto desde la interfaz con el boton btnAniadirGasto (Con programación defensiva)
+					 		 * Aï¿½adir gasto desde la interfaz con el boton btnAniadirGasto (Con programaciï¿½n defensiva)
 					 		 */
+					 		String mes = String.valueOf(cmbMes.getSelectedIndex() + 1);
+						 	boolean n = operaciones.puedeGastar(mes);	
+						 	
+						 	if(!n){
+						 		JOptionPane.showMessageDialog(frmPresupuesto,
+						 			    "Has llegado al lï¿½mite, no gastes en eso",
+						 			    "Error",
+						 			    JOptionPane.ERROR_MESSAGE);
+						 		return;
+						 	}
 					 	Double.parseDouble(textCant.getText());
 					 	operaciones.setGasto(Double.parseDouble(textCant.getText()), txtNombre.getText(), cmbTipo.getSelectedItem().toString(), Integer.parseInt(cmbDia.getSelectedItem().toString()), cmbMes.getSelectedItem().toString());
 					 	textCant.setText("");
@@ -403,10 +459,19 @@ public class graph {
 					 			    "Error",
 					 			    JOptionPane.ERROR_MESSAGE);
 					 	}
+					 	catch(Exception e3){
+					 		//System.err.println("Te pasaste");
+					 		JOptionPane.showMessageDialog(frmPresupuesto,
+					 			    "oohh no D:",
+					 			    "Error",
+					 			    JOptionPane.ERROR_MESSAGE);
+					 	}
 					 	
-			 } 	
+			 }
+					 	
+			 	
 			 /**
-			  * Grafica de gastos según las categorías.
+			  * Grafica de gastos segï¿½n las categorï¿½as.
 			  */
 			 if (e.getSource() == btnGraficar) {
 				 	JFrame grafica = new JFrame("");
@@ -431,21 +496,21 @@ public class graph {
 					grafica.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		        }
 			 /**
-			  * Accion para llamar a la JFrame para ver los datos en la base de Datos
+			  * Accion para llamar a la JFrame para ver los datos en la tabla "dinero"
 			  */
 		     if (e.getSource() == btnVerDatos) {
 		    	data data = new data();
 		        data.setVisible(true);	
 		        }
 		     /**
-		      * Accion para llamar a la JFrame que permite modificar los datos en la base de datos
+		      * Accion para llamar a la JFrame que permite modificar (actualizar o eliminar) los datos en la tabla "dinero"
 		      */
 		     if (e.getSource() == btnModificarGasto) {
 		    	 Modificar mod = new Modificar();
 		        mod.setVisible(true);
 		        }
 		     /**
-		      * Acciones para añadir Ingresos a la base de datos
+		      * Acciones para aï¿½adir Ingresos a la tabla "monto"
 		      */
 		     if (e.getSource() == btnIngresarCantidad) {
 		    	 try{
@@ -457,6 +522,30 @@ public class graph {
 		    		 System.err.println("El valor ingresado no es un numero");
 		    		 JOptionPane.showMessageDialog(frmPresupuesto,
 		    				    "El valor ingresado no es un numero",
+		    				    "Error",
+		    				    JOptionPane.ERROR_MESSAGE);
+		    	 }
+		    	 catch(NumberFormatException e1){
+		    		 e1.printStackTrace();
+				 		System.err.println("El valor ingresado no es un numero");
+				 		JOptionPane.showMessageDialog(frmPresupuesto,
+				 			    "El valor ingresado no es un numero",
+				 			    "Error",
+				 			    JOptionPane.ERROR_MESSAGE);
+				 	}
+		        }
+		     
+		     if (e.getSource() == btnCalcularMes) {
+		    	 try{
+		    	 	
+		    	 	lblDineroGastado.setText("Q"+""+operaciones.gastadoMes((String) cmbCalcularMes.getSelectedItem()));
+		    	 	frmPresupuesto.setVisible(true);
+		    	 }
+		    	 catch(InputMismatchException e1){
+		    		 e1.printStackTrace();
+		    		 System.err.println("El valor ingresado no es un mes");
+		    		 JOptionPane.showMessageDialog(frmPresupuesto,
+		    				    "El valor ingresado no es un mes",
 		    				    "Error",
 		    				    JOptionPane.ERROR_MESSAGE);
 		    	 }

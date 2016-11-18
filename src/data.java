@@ -22,6 +22,7 @@ import javax.swing.table.DefaultTableModel;
 *@author: Rodrigo Stuardo Juarez Jui 16073 
 *@author: Rodrigo Javier Albizures Lopez 16767
 *@author: Jose Rodolfo Perez Garcia 16056
+*@author: Rocio Loarca 16329
 *@version: 11/12/2016
 */
 public class data extends JFrame {
@@ -60,15 +61,15 @@ public class data extends JFrame {
 		Vector data = new Vector();
 		try {
             con = DriverManager.getConnection("jdbc:mysql://" + "localhost"
-                    + ":3306/mydb", "root", "root"); //Se conecta a la base de datos (cambiar contrase�a en las ultimas comillas)
+                    + ":3306/mydb", "root", "uvg"); //Se conecta a la base de datos
 
-            String sql = "select * from dinero";
+            String sql = "select * from Dinero";
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             ResultSetMetaData md = rs.getMetaData();
             int columns = md.getColumnCount();
             for (int i = 1; i <= columns; i++) {
-                columnNames.addElement(md.getColumnName(i));
+                columnNames.addElement(md.getColumnName(i)); //Empieza a llenar la tabla con todos los datos de la tabla "dinero"
             }
 
             while (rs.next()) {

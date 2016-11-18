@@ -18,6 +18,7 @@ import com.mysql.jdbc.PreparedStatement;
 *@author: Rodrigo Stuardo Juarez Jui 16073 
 *@author: Rodrigo Javier Albizures Lopez 16767
 *@author: Jose Rodolfo Perez Garcia 16056
+*@author: Rocio Loarca 16329
 *@version: 11/2/2016
 */
 
@@ -31,7 +32,7 @@ public class Calculos {
 	private Calendar fecha;
 
 	/**
-	 * 
+	 * Constructor de la clase.
 	 */
 	public Calculos() {
 		mydb = new BD();
@@ -45,7 +46,7 @@ public class Calculos {
 	
 	
 	/**
-	*Metodo que obtiene el entero de los gastos de la base de datos
+	*Metodo que obtiene el valor de los gastos de la base de datos de la tabla "dinero"
 	*@return El entero del gasto
 	*/
 	
@@ -127,7 +128,7 @@ public class Calculos {
 	
  	
  	/**
-	*metodo que hace una constulta a la base de datos  sobre el monto de tipo string
+	*metodo que hace una constulta a la base de datos  sobre el monto de tipo string de la tabla "monto"
 	*@return String con el monto de la base de datos
 	*/
 	
@@ -170,7 +171,7 @@ public class Calculos {
  	
  	
  	/**
- 	 * Metodo para modificar un gasto en especifico
+ 	 * Metodo para modificar un gasto en especifico de la tabla "dinero"
  	 * @param cant
  	 * @param nom
  	 * @param tipo
@@ -215,10 +216,126 @@ public class Calculos {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+ 	}/**
+ 	 * Metodo para convertir los meses en String
+ 	 * @param numMes
+ 	 * @return el mes
+ 	 */
+ 	public String getMonth(String numMes) {
+ 		if(numMes.equals("1")) {
+ 			return "Enero";
+ 		}
+ 		if(numMes.equals("2")) {
+ 			return "Febrero";}
+ 		if(numMes.equals("3")) {
+ 			return "Marzo";}
+ 		if(numMes.equals("4")) {
+ 			return "Abril";}
+ 		if(numMes.equals("5")) {
+ 			return "Mayo";}
+ 		if(numMes.equals("6")) {
+ 			return "Junio";}
+ 		if(numMes.equals("7")) {
+ 			return "Julio";}
+ 		if(numMes.equals("8")) {
+ 			return "Agosto";}
+ 		if(numMes.equals("9")) {
+ 			return "Septiembre";}
+ 		if(numMes.equals("10")) {
+ 			return "Octubre";}
+ 		if(numMes.equals("11")) {
+ 			return "Noviembre";}
+ 		if(numMes.equals("12")) {
+ 			return "Diciembre";}
+ 		return "";
+ 	}
+
+ 	/**
+ 	 * Metodo para consultar el dinero gastado de un mes en especifico
+ 	 * @param mes
+ 	 */
+ 	
+ 	
+ 	public double gastadoMes(String mes) {
+ 		double total = 0;
+ 		String consulta = "SELECT sum(CantDinero) as Total FROM `Dinero`where mes like \""+mes+"\"" ;
+ 		try{
+ 			double d= Double.valueOf(mes);
+ 	 		if (d==(int)d){
+ 	 			 consulta = "SELECT sum(CantDinero) as Total FROM `Dinero`where mes like \""+getMonth(mes)+"\"" ;
+ 	 		}
+ 		}
+ 		catch(Exception e){
+ 			
+ 		}
+ 		
+ 		System.out.println(mes);
+ 		//* Hace la consulta del mes que desea el usuario
+	 	try{
+		 	
+	 		java.sql.Statement st = mydb.getCon().createStatement();
+	 		ResultSet rs=st.executeQuery(consulta);
+	 		while (rs.next())
+	 		{
+	 			total = rs.getDouble("Total");
+	 			// print the results
+	 		} 
+	 		System.out.println(total);
+	 		return total;
+	 		}
+         catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+		}
+	 	 catch (Exception exc){
+	 		exc.printStackTrace();
+	 	}
+		return total;
  	}
  	
  	/**
- 	 * Metodo que actualiza los datos de la base de datos
+ 	 * Metodo para verificar el dinero gastado y el ingresado
+ 	 * @param mes
+ 	 * @return falso si el dinero es mayor al limite
+ 	 * @throws Exception si el dinero gastado es mayor al limite
+ 	 */
+ 	public boolean puedeGastar(String mes) throws Exception{
+ 		
+ 		
+ 		double limite = 0;
+ 		String consul = "SELECT SUM(monto) AS monto FROM `monto` where mes = " + mes; //mes actual?
+ 				
+ 		//* Hace la consulta
+	 	try{
+		 	double dineroGastado = gastadoMes(mes);
+		 	java.sql.Statement st = mydb.getCon().createStatement();
+		 	ResultSet cantLim = st.executeQuery(consul); //Cantidad limite ha gastar
+		 	
+		 	while (cantLim.next()) {
+		 		limite = cantLim.getDouble("monto");
+	        }
+
+		 		
+	 		if (dineroGastado>limite) //Si el dinero gastado es menor al lï¿½mite .....
+	 		{
+	 			// print the results
+	 			return false;
+	 		} 
+	 		}
+         catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+		}
+	 	 catch (Exception exc){
+	 		exc.printStackTrace();}
+		
+	 	return true;
+ 	}
+ 	
+ 	
+ 	
+ 	/**
+ 	 * Metodo que actualiza los datos de la base de datos "monto"
  	 * @param cant
  	 */
  	public void updateMonto(double cant){
@@ -274,7 +391,7 @@ public class Calculos {
 	 		double monto;
 	 		
 	 		String s;
-		 	s = "INSERT INTO Dinero VALUES (0,"+ cant +" , '" + nom +"', '"+ tipo +"',"+ dia +",'"+ mes +"');";
+		 	s = "INSERT INTO Dinero VALUES (CantDinero, Nombre, Tipo, dia, mes, Monto) VALUES ("+ cant +" , '" + nom +"', '"+ tipo +"',"+ dia +",'"+ mes +"','"+ getMonto() +"');";
         	try {
 				st.executeUpdate(s);
 			} catch (SQLException e1) {
@@ -288,7 +405,7 @@ public class Calculos {
  	
  	
  	/**
- 	 * Metodo para añadir dinero al monto total
+ 	 * Metodo para aï¿½adir dinero al monto total
  	 * @param cant
  	 */
  	public void aniadirMonto(double cant){
@@ -319,7 +436,7 @@ public class Calculos {
  	}
  	
  	/**
- 	 * Metodo para eliminar algun gasto 
+ 	 * Metodo para eliminar algun gasto de la tabla "dinero"
  	 * @param id
  	 */
  	public void eliminar(int id){

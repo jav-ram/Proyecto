@@ -4,6 +4,7 @@
 *@author: Rodrigo Stuardo Juarez Jui 16073 
 *@author: Rodrigo Javier Albizures Lopez 16767
 *@author: Jose Rodolfo Perez Garcia 16056
+*@author: Rocio Loarca 16329
 *@version: 11/2/2016
 */
 

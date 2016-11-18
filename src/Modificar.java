@@ -27,6 +27,7 @@ import java.util.Vector;
 *@author: Rodrigo Stuardo Juarez Jui 16073 
 *@author: Rodrigo Javier Albizures Lopez 16767
 *@author: Jose Rodolfo Perez Garcia 16056
+*@author: Rocio Loarca 16329
 *@version: 11/12/2016
 */
 public class Modificar extends JFrame {
@@ -125,21 +126,21 @@ public class Modificar extends JFrame {
 			 			    "La fecha no es valida",
 			 			    "Error",
 			 			    JOptionPane.ERROR_MESSAGE);
-			 		cmbDiaM.setSelectedItem("30");
+			 		cmbDiaM.setSelectedItem("30"); //Cambia el día mal colocado por el último día del mes correspondiente
 				}
 				if((cmbDiaM.getSelectedItem()=="31")&&(cmbMesM.getSelectedItem()=="Abril")){
 			 		JOptionPane.showMessageDialog(frame,
 			 			    "La fecha no es valida",
 			 			    "Error",
 			 			    JOptionPane.ERROR_MESSAGE);
-			 		cmbDiaM.setSelectedItem("30");
+			 		cmbDiaM.setSelectedItem("30"); //Cambia el día mal colocado por el último día del mes correspondiente
 				}
 				if((cmbDiaM.getSelectedItem()=="31")&&(cmbMesM.getSelectedItem()=="Junio")){
 			 		JOptionPane.showMessageDialog(frame,
 			 			    "La fecha no es valida",
 			 			    "Error",
 			 			    JOptionPane.ERROR_MESSAGE);
-			 		cmbDiaM.setSelectedItem("30");
+			 		cmbDiaM.setSelectedItem("30"); //Cambia el día mal colocado por el último día del mes correspondiente
 				}
 				if((cmbDiaM.getSelectedItem()=="31")&&(cmbMesM.getSelectedItem()=="Septiembre")){
 					System.err.println("El valor ingresado no es un numero");
@@ -147,14 +148,14 @@ public class Modificar extends JFrame {
 			 			    "La fecha no es valida",
 			 			    "Error",
 			 			    JOptionPane.ERROR_MESSAGE);
-			 		cmbDiaM.setSelectedItem("30");
+			 		cmbDiaM.setSelectedItem("30"); //Cambia el día mal colocado por el último día del mes correspondiente
 				}
 				if((cmbDiaM.getSelectedItem()=="31")&&(cmbMesM.getSelectedItem()=="Noviembre")){
 			 		JOptionPane.showMessageDialog(frame,
 			 			    "La fecha no es valida",
 			 			    "Error",
 			 			    JOptionPane.ERROR_MESSAGE);
-			 		cmbDiaM.setSelectedItem("30");
+			 		cmbDiaM.setSelectedItem("30"); //Cambia el día mal colocado por el último día del mes correspondiente
 				}
 				if((cmbDiaM.getSelectedItem()=="31")&&(cmbMesM.getSelectedItem()=="Febrero")){
 			 		JOptionPane.showMessageDialog(frame,
@@ -162,10 +163,10 @@ public class Modificar extends JFrame {
 			 			    "Error",
 			 			    JOptionPane.ERROR_MESSAGE);
 			 		if((anio%4==0) && (anio%100==0)){
-			 			cmbDiaM.setSelectedItem("28");
+			 			cmbDiaM.setSelectedItem("28"); //Cambia el día mal colocado por el último día del mes de febrero, en caso que no sea bisiesto
 			 		}
 			 		if((anio%4==0) && (anio%100!=0)){
-			 			cmbDiaM.setSelectedItem("29");
+			 			cmbDiaM.setSelectedItem("29"); //Cambia el día mal colocado por el último día del mes de febrero si es bisiesto
 			 		}
 				}
 				if((cmbDiaM.getSelectedItem()=="30")&&(cmbMesM.getSelectedItem()=="Febrero")){
@@ -174,10 +175,10 @@ public class Modificar extends JFrame {
 			 			    "Error",
 			 			    JOptionPane.ERROR_MESSAGE);
 			 		if((anio%4==0) && (anio%100==0)){
-			 			cmbDiaM.setSelectedItem("28");
+			 			cmbDiaM.setSelectedItem("28"); //Cambia el día mal colocado por el último día del mes de febrero, en caso que no sea bisiesto
 			 		}
 			 		if((anio%4==0) && (anio%100!=0)){
-			 			cmbDiaM.setSelectedItem("29");
+			 			cmbDiaM.setSelectedItem("29"); //Cambia el día mal colocado por el último día del mes de febrero si es bisiesto
 			 		}
 			 		
 				}
@@ -189,7 +190,7 @@ public class Modificar extends JFrame {
 					 			    "La fecha no es valida",
 					 			    "Error",
 					 			    JOptionPane.ERROR_MESSAGE);
-					 		cmbDiaM.setSelectedItem("28");
+					 		cmbDiaM.setSelectedItem("28"); //Cambia el día mal colocado por el último día del mes de febrero, en caso que no sea bisiesto
 							cmbMesM.setSelectedItem("Febrero");
 					}
 				}
@@ -208,21 +209,21 @@ public class Modificar extends JFrame {
 			 			    "La fecha no es valida",
 			 			    "Error",
 			 			    JOptionPane.ERROR_MESSAGE);
-			 		cmbDiaM.setSelectedItem("30");
+			 		cmbDiaM.setSelectedItem("30"); //Cambia el día mal colocado por el último día del mes correspondiente
 				}
 				if((cmbDiaM.getSelectedItem()=="31")&&(cmbMesM.getSelectedItem()=="Abril")){
 			 		JOptionPane.showMessageDialog(frame,
 			 			    "La fecha no es valida",
 			 			    "Error",
 			 			    JOptionPane.ERROR_MESSAGE);
-			 		cmbDiaM.setSelectedItem("30");
+			 		cmbDiaM.setSelectedItem("30"); //Cambia el día mal colocado por el último día del mes correspondiente
 				}
 				if((cmbDiaM.getSelectedItem()=="31")&&(cmbMesM.getSelectedItem()=="Junio")){
 			 		JOptionPane.showMessageDialog(frame,
 			 			    "La fecha no es valida",
 			 			    "Error",
 			 			    JOptionPane.ERROR_MESSAGE);
-			 		cmbDiaM.setSelectedItem("30");
+			 		cmbDiaM.setSelectedItem("30"); //Cambia el día mal colocado por el último día del mes correspondiente
 				}
 				if((cmbDiaM.getSelectedItem()=="31")&&(cmbMesM.getSelectedItem()=="Septiembre")){
 					System.err.println("El valor ingresado no es un numero");
@@ -230,14 +231,14 @@ public class Modificar extends JFrame {
 			 			    "La fecha no es valida",
 			 			    "Error",
 			 			    JOptionPane.ERROR_MESSAGE);
-			 		cmbDiaM.setSelectedItem("30");
+			 		cmbDiaM.setSelectedItem("30"); //Cambia el día mal colocado por el último día del mes correspondiente
 				}
 				if((cmbDiaM.getSelectedItem()=="31")&&(cmbMesM.getSelectedItem()=="Noviembre")){
 			 		JOptionPane.showMessageDialog(frame,
 			 			    "La fecha no es valida",
 			 			    "Error",
 			 			    JOptionPane.ERROR_MESSAGE);
-			 		cmbDiaM.setSelectedItem("30");
+			 		cmbDiaM.setSelectedItem("30"); //Cambia el día mal colocado por el último día del mes correspondiente
 				}
 				if((cmbDiaM.getSelectedItem()=="31")&&(cmbMesM.getSelectedItem()=="Febrero")){
 			 		JOptionPane.showMessageDialog(frame,
@@ -245,10 +246,10 @@ public class Modificar extends JFrame {
 			 			    "Error",
 			 			    JOptionPane.ERROR_MESSAGE);
 			 		if((anio%4==0) && (anio%100==0)){
-			 			cmbDiaM.setSelectedItem("28");
+			 			cmbDiaM.setSelectedItem("28"); //Cambia el día mal colocado por el último día del mes de febrero, en caso que no sea bisiesto
 			 		}
 			 		if((anio%4==0) && (anio%100!=0)){
-			 			cmbDiaM.setSelectedItem("29");
+			 			cmbDiaM.setSelectedItem("29"); //Cambia el día mal colocado por el último día del mes de febrero si es bisiesto
 			 		}
 				}
 				if((cmbDiaM.getSelectedItem()=="30")&&(cmbMesM.getSelectedItem()=="Febrero")){
@@ -257,10 +258,10 @@ public class Modificar extends JFrame {
 			 			    "Error",
 			 			    JOptionPane.ERROR_MESSAGE);
 			 		if((anio%4==0) && (anio%100==0)){
-			 			cmbDiaM.setSelectedItem("28");
+			 			cmbDiaM.setSelectedItem("28"); //Cambia el día mal colocado por el último día del mes de febrero, en caso que no sea bisiesto
 			 		}
 			 		if((anio%4==0) && (anio%100!=0)){
-			 			cmbDiaM.setSelectedItem("29");
+			 			cmbDiaM.setSelectedItem("29"); //Cambia el día mal colocado por el último día del mes de febrero si es bisiesto
 			 		}
 				}
 				if((cmbDiaM.getSelectedItem()=="29")&&(cmbMesM.getSelectedItem()=="Febrero")){
@@ -271,7 +272,7 @@ public class Modificar extends JFrame {
 					 			    "La fecha no es valida",
 					 			    "Error",
 					 			    JOptionPane.ERROR_MESSAGE);
-					 		cmbDiaM.setSelectedItem("28");
+					 		cmbDiaM.setSelectedItem("28"); //Cambia el día mal colocado por el último día del mes de febrero, en caso que no sea bisiesto
 					}
 				}
 			}
@@ -297,12 +298,12 @@ public class Modificar extends JFrame {
 		btnEliminarGasto.addActionListener(new Listener());
 		
 		
-		// Llena el comboBox
+		// Llena el comboBox con los datos de la tabla "dinero" de mydb
 		Vector columnNames = new Vector();
 		Vector data = new Vector();
 		try {
             con = DriverManager.getConnection("jdbc:mysql://" + "localhost"
-                    + ":3306/mydb", "root", "root");
+                    + ":3306/mydb", "root", "");
 
             String sql = "select * from dinero";
             Statement stmt = con.createStatement();
@@ -344,7 +345,7 @@ public class Modificar extends JFrame {
 			// TODO Auto-generated method stub
 			if(e.getSource()==btnModificarGasto){
 				try{
-					String[] idi= comboBoxModificar.getSelectedItem().toString().split(" ");
+					String[] idi= comboBoxModificar.getSelectedItem().toString().split(" "); //Se usa para obtener el id del gasto que se desea modificar
 					System.out.println(idi[1]);
 					int id=Integer.parseInt(idi[1]);
 				 	Double.parseDouble(textCantM.getText());
@@ -370,7 +371,7 @@ public class Modificar extends JFrame {
 				 	}
 			}
 			if (e.getSource()== btnEliminarGasto){
-				String idi[]= comboBoxModificar.getSelectedItem().toString().split(" ");
+				String idi[]= comboBoxModificar.getSelectedItem().toString().split(" "); //Se usa para obtener el indice del dato a eliminar de la tabla "dinero"
 				int id= Integer.parseInt(idi[1]);
 				operaciones.eliminar(id);
 			}
