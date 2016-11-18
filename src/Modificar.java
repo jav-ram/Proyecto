@@ -296,6 +296,8 @@ public class Modificar extends JFrame {
 		btnModificarGasto.addActionListener(new Listener());
 		btnEliminarGasto.addActionListener(new Listener());
 		
+		
+		// Llena el comboBox
 		Vector columnNames = new Vector();
 		Vector data = new Vector();
 		try {
@@ -310,14 +312,15 @@ public class Modificar extends JFrame {
             for (int i = 1; i <= columns; i++) {
                 columnNames.addElement(md.getColumnName(i));
             }
-
+            String cadena="";
             while (rs.next()) {
                 Vector row = new Vector(columns);
-
+                cadena="";
                 for (int i = 1; i <= columns; i++) {
+                	cadena= cadena+ " " +rs.getObject(i).toString();
                     row.addElement(rs.getObject(i));
                 }
-
+                comboBoxModificar.addItem(cadena);
                 data.addElement(row);
             }
 
@@ -327,12 +330,6 @@ public class Modificar extends JFrame {
         } catch (Exception e) {
             System.out.println(e);
         }
-		
-		int x=0;
-		while (x< data.size()){
-			comboBoxModificar.addItem(data.elementAt(x));
-			x++;	
-		}
 		
 		
 	}
@@ -347,7 +344,9 @@ public class Modificar extends JFrame {
 			// TODO Auto-generated method stub
 			if(e.getSource()==btnModificarGasto){
 				try{
-					int id=comboBoxModificar.getSelectedIndex();
+					String[] idi= comboBoxModificar.getSelectedItem().toString().split(" ");
+					System.out.println(idi[1]);
+					int id=Integer.parseInt(idi[1]);
 				 	Double.parseDouble(textCantM.getText());
 				 	operaciones.updateGasto(Double.parseDouble(textCantM.getText()), txtNombreM.getText(), cmbTipoM.getSelectedItem().toString(), Integer.parseInt(cmbDiaM.getSelectedItem().toString()), cmbMesM.getSelectedItem().toString(), id);
 				 	textCantM.setText("");
@@ -371,7 +370,8 @@ public class Modificar extends JFrame {
 				 	}
 			}
 			if (e.getSource()== btnEliminarGasto){
-				int id= comboBoxModificar.getSelectedIndex();
+				String idi[]= comboBoxModificar.getSelectedItem().toString().split(" ");
+				int id= Integer.parseInt(idi[1]);
 				operaciones.eliminar(id);
 			}
 		}

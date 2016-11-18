@@ -178,7 +178,6 @@ public class Calculos {
  	public void updateGasto(double cant, String nom, String tipo, int dia, String mes, int id){
  		java.sql.Statement st= null;
  		String s=new String();
- 		int x= id+1;
  		try {
 			st = mydb.getCon().createStatement();
 		} catch (SQLException e2) {
@@ -187,7 +186,7 @@ public class Calculos {
 		}
 
  		try {
- 			s= "Select * from dinero where idDinero= '"+x+"';";
+ 			s= "Select * from dinero where idDinero= '"+id+"';";
  			try{
  				ResultSet rs = st.executeQuery(s);
  				while (rs.next()){
@@ -207,7 +206,7 @@ public class Calculos {
  		PreparedStatement updateExp;
  		try {
  			updateExp= (PreparedStatement) mydb.getCon().prepareStatement("update dinero SET CantDinero="+cant+", Nombre='"+nom+
- 					"',Tipo='"+tipo+"', dia='"+dia+"', mes='"+ mes+"' where idDinero='"+x+"';");
+ 					"',Tipo='"+tipo+"', dia='"+dia+"', mes='"+ mes+"' where idDinero='"+id+"';");
  			int updateEXP_done= updateExp.executeUpdate();
  		}catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -215,12 +214,10 @@ public class Calculos {
 		}
  	}
  	
- 	
- 	
  	/**
-	*Metodo que actualiza los datos de la base de datos
-	*/
-	
+ 	 * Metodo que actualiza los datos de la base de datos
+ 	 * @param cant
+ 	 */
  	public void updateMonto(double cant){
  		
  		java.sql.Statement st = null;
@@ -249,12 +246,15 @@ public class Calculos {
  		
  	}
  	
-	/**
-	*Metodo que ingresa los gastos en la base de datos
-	*/
 	
-	
-	
+ 	/**
+ 	 * Metodo que ingresa los gastos en la base de datos
+ 	 * @param cant
+ 	 * @param nom
+ 	 * @param tipo
+ 	 * @param dia
+ 	 * @param mes
+ 	 */
  	public void setGasto(double cant,String nom, String tipo, int dia, String mes){
  		java.sql.Statement st = null;
 	 	
@@ -284,6 +284,10 @@ public class Calculos {
  	}
  	
  	
+ 	/**
+ 	 * Metodo para añadir dinero al monto total
+ 	 * @param cant
+ 	 */
  	public void aniadirMonto(double cant){
 		 
  		java.sql.Statement st = null;
@@ -311,6 +315,10 @@ public class Calculos {
  		
  	}
  	
+ 	/**
+ 	 * Metodo para eliminar algun gasto 
+ 	 * @param id
+ 	 */
  	public void eliminar(int id){
  		java.sql.Statement st= null;
  		String s= new String();
@@ -321,7 +329,7 @@ public class Calculos {
  		}
  		PreparedStatement deleteEXP;
  		try {
- 			deleteEXP= (PreparedStatement) mydb.getCon().prepareStatement("delete from dinero where idDinero= '"+(id+1)+"';");
+ 			deleteEXP= (PreparedStatement) mydb.getCon().prepareStatement("delete from dinero where idDinero= '"+(id)+"';");
  			int deleteEXP_done=  deleteEXP.executeUpdate();
  		}catch (SQLException e){
  			e.printStackTrace();
